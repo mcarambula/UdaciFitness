@@ -54,7 +54,9 @@ export function getMetricMetaInfo(metric) {
                 return (
                     <View style={[styles.iconContainer, {backgroundColor: red } ]}>
                         <MaterialIcons
+                            color={white}
                             name='directions-run'
+                            size={32}
                         />
                     </View>
                 )
