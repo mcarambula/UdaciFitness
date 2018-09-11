@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Platform, StyleSheet } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { addEntry } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
@@ -62,6 +63,7 @@ class AddEntry extends Component {
         }));
         this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }));
         // Navigate to home
+        this.toHome();
         submitEntry({ key, entry });
 
     // Clear local notification
@@ -74,6 +76,13 @@ class AddEntry extends Component {
         }));
         // Route to Home
         removeEntry(key);
+        
+        this.toHome();
+    }
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddEntry'
+        }))
     }
     render() {
         const metaInfo = getMetricMetaInfo();
@@ -92,7 +101,6 @@ class AddEntry extends Component {
                 </View>
             )
         }
-
         return (
             <View style={styles.container}>
                 <DateHeader date={(new Date()).toLocaleDateString()}/>
